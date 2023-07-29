@@ -1,9 +1,8 @@
 package com.example.week11inclass;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class apiResponse {
+public class ApiResponse {
     public ArrayList<Employee> getEmployees() {
         return Employees;
     }

@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.week11inclass.databinding.FragmentSecondBinding;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -67,7 +68,10 @@ public class SecondFragment extends Fragment {
                         binding.textviewSecond.setText("Response is: " + response.substring(0,500));
 
                         // Trying to deserialize JSON
-                        
+                        Gson gson = new Gson();
+                        ApiResponse apiResponse =  gson.fromJson(response,ApiResponse.class );
+
+                        //
                     }
                 }, new Response.ErrorListener() {
             @Override
