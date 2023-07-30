@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".SecondFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,8 +35,8 @@
 
         <ListView
             android:id="@+id/listviewEmployees"
-            android:layout_width="225dp"
-            android:layout_height="94dp"
+            android:layout_width="257dp"
+            android:layout_height="430dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

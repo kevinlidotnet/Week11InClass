@@ -68,18 +68,19 @@ public class SecondFragment extends Fragment {
                         // Display the first 500 characters of the response string.
                         binding.textviewSecond.setText("Response is: " + response.substring(0,500));
 
-                        // Trying to deserialize JSON
+                        // Deserialize JSON
                         Gson gson = new Gson();
                         ApiResponse apiResponse =  gson.fromJson(response,ApiResponse.class );
 
                         //Binding to the list view
-                        // Add the request to the RequestQueue.
-                        String[] employees = new String[apiResponse.getEmployees().size()];
-                        for (int i = 0; i <apiResponse.getEmployees().size(); i++ ) {
-                            employees[i]=apiResponse.getEmployees().get(i).toString();
+                        ArrayList<String> employeeList = new ArrayList<>();
+                        for (Employee employee: apiResponse.getEmployees()
+                             ) {
+                            employeeList.add(employee.toString());
                         }
+
                         ArrayAdapter<String> itemsAdapter =
-                                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,employees);
+                                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,employeeList); //https://stackoverflow.com/questions/3663745/what-is-android-r-layout-simple-list-item-1
                         binding.listviewEmployees.setAdapter(itemsAdapter);
                     }
                 }, new Response.ErrorListener() {
