@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,8 @@ import com.example.week11inclass.databinding.FragmentSecondBinding;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class SecondFragment extends Fragment {
 
@@ -56,8 +59,6 @@ public class SecondFragment extends Fragment {
     private void getEmployees() {
         String url = "https://my-json-server.typicode.com/kevinlidotnet/jsondemo/db";
 
-
-
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -71,7 +72,15 @@ public class SecondFragment extends Fragment {
                         Gson gson = new Gson();
                         ApiResponse apiResponse =  gson.fromJson(response,ApiResponse.class );
 
-                        //
+                        //Binding to the list view
+                        // Add the request to the RequestQueue.
+                        String[] employees = new String[apiResponse.getEmployees().size()];
+                        for (int i = 0; i <apiResponse.getEmployees().size(); i++ ) {
+                            employees[i]=apiResponse.getEmployees().get(i).toString();
+                        }
+                        ArrayAdapter<String> itemsAdapter =
+                                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,employees);
+                        binding.listviewEmployees.setAdapter(itemsAdapter);
                     }
                 }, new Response.ErrorListener() {
             @Override

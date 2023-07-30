@@ -84,4 +84,9 @@ public class Employee {
     private  String phoneNumber;
     private  String emailAddress;
 
+    public String toString()
+    {
+        return getPreferredFullName() +"\n" + getEmailAddress();
+    }
+
 }
