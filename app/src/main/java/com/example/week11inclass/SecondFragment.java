@@ -9,7 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.week11inclass.databinding.FragmentSecondBinding;
+import com.google.gson.Gson;
 
 public class SecondFragment extends Fragment {
 
@@ -36,6 +43,32 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
+
+        String url = "https://my-json-server.typicode.com/kevinlidotnet/jsondemo/db";
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                binding.textviewSecond.setText(response);
+
+             //Using GSON to deserialize and display
+                Gson gson = new Gson();
+                ApiResponse apiResponse = gson.fromJson(response,ApiResponse.class);
+
+
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+
+        //API Request
+       //StringRquest
+        queue.add(stringRequest);
     }
 
     @Override
